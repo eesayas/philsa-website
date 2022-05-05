@@ -7,8 +7,8 @@ COPY / ./
 RUN yarn install 
 RUN yarn build
 
-EXPOSE 3009
+EXPOSE 1338
 ENV NUXT_HOST=0.0.0.0
-ENV NUXT_PORT=3009
+ENV NUXT_PORT=1338
 
 CMD ["yarn", "start"]
