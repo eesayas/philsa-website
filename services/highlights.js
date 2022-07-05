@@ -47,6 +47,14 @@ class HiglightService {
 
     return processed;
   }
+
+  async getHighlightBackground() {
+    const query = "/api/highlight-display";
+    const response = await this.axios.get(query);
+
+    const { background } = response.data.data.attributes;
+    return background;
+  }
 }
 
 export default HiglightService;

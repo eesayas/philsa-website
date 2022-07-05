@@ -1,6 +1,6 @@
 <template>
   <div style="height: 500px">
-    <client-only>
+    <client-only v-if="highlights.length > 0">
       <hooper
         style="height: 100%; padding: 0; margin: 0;"
         :itemsToShow="1.25"
@@ -12,7 +12,7 @@
       >
         <slide v-for="highlight in highlights" :key="highlight.Slug">
           <div class="mx-auto rounded" style="width: 98%">
-            <v-card style="background: #ffcece">
+            <v-card :style="{ background: background }">
               <v-img
                 height="500"
                 contain
@@ -38,10 +38,21 @@
             </v-card>
           </div>
         </slide>
-
         <hooper-pagination slot="hooper-addons"> </hooper-pagination>
       </hooper>
     </client-only>
+
+    <div v-else class="container shape-container d-flex" style="height: 500px">
+      <div class="col px-0 my-auto">
+        <div class="row justify-content-center text-center">
+          <div class="col-lg-10">
+            <v-img
+              src="https://photos.smugmug.com/photos/i-bzxrsKF/0/240281b0/X3/i-bzxrsKF-X3.png"
+            ></v-img>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -60,6 +71,7 @@ export default {
   }),
   methods: mapActions({
     fetchHighlights: "highlights/fetchHighlights",
+    getHighlightBackground: "highlights/getHighlightBackground",
   }),
   computed: {
     center: function() {
@@ -67,10 +79,12 @@ export default {
     },
     ...mapGetters({
       highlights: "highlights/highlights",
+      background: "highlights/background",
     }),
   },
   created() {
     this.fetchHighlights();
+    this.getHighlightBackground();
   },
 };
 </script>
